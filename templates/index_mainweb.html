@@ -196,8 +196,6 @@ summary::-webkit-details-marker {
 	<b> Type of Experiment: </b> <br>
 	<input type="radio" id="expType1" name="expType" value="1" onclick="updateOptions()" checked />
 	<label for="expType1" class="radio-label">Continuous Labelling - State Comparison</label><br>
-	<input type="radio" id="expType2" name="expType" value="2" onclick="updateOptions()" />
-	<label for="expType2" class="radio-label">Pulse Labelling - In Development</label><br>
 	<input type="radio" id="expType3" name="expType" value="3" onclick="updateOptions()" />
 	<label for="expType3" class="radio-label">Relative Fractional Uptake</label><br>
 	<br>	
@@ -870,32 +868,6 @@ summary::-webkit-details-marker {
 		<small>**More Info** </small>
 			</p>
 		<br><br>
-
-		<label for="PULSEstate"><b>For Pulse plotting;
-		State of Interest: </b></label>
-		<input type="text" id="PULSEstate" name="PULSEstate" />
-		<p style="display:inline" title="This is necessary to specify which state in the data should be examined. If left blank then the code will simply take the first state it finds.">
-		<small>**More Info** </small>
-			</p><br>
-		<font color="#FAFAFA"> <b> For Pulse plotting; </b> </font>
-		<b>Reference Time:</b>
-		<input type="text" id="PULSEref" name="PULSEref" class="resizedColbox"/>
-		<p style="display:inline" title="The reference time is what is subtracted from every other time (eg state 2 in continuous labelling). If not input this will be the first non-zero timepoint the code finds.">
-		<small>**More Info** </small>
-			</p><br>
-		<font color="#FAFAFA"> <b> For Pulse plotting; </b> </font>
-		Number of time points:
-		<input type="number" id="PULSEnumtime" name="PULSEnumtime" min="1" value="1" class="resizedTextbox"/> <br>
-		<font color="#FAFAFA"> <b> For Pulse plotting; </b> </font>
-		<b>Time Points:</b>
-		<p style="display:inline" title="This should list all of the time points you wish to use for comparison. This should not include the reference time point or 0, (although these should be present in the data). If not input the code will instead take all but the first non-zero timepoints.">
-		<small>**More Info** </small>
-			</p>
-		<br>
-		<div id="inputContainerPULSEtimes">
-	    		<!-- Input fields will be generated here -->
-		</div>
-		<br><br>
 		
 		<label for="UsePercentRFU"><b>For RFU plotting; 
 		Multiply Values by 100: </b></label>
@@ -1028,38 +1000,6 @@ summary::-webkit-details-marker {
 		// Initial generation of fields when the page loads
 		generateProtFields();
 
-
-		function generatePulseTimeFields() {
-        	    var numFieldsPulseTime = document.getElementById("PULSEnumtime").value;
-        	    var containerPulseTime = document.getElementById("inputContainerPULSEtimes");
-        	    containerPulseTime.innerHTML = ""; // Clear previous fields
-
-        	    for (var i = 0; i < numFieldsPulseTime; i++) {
-        	        var inputGroupPulseT = document.createElement("div");
-        	        inputGroupPulseT.className = "input-group";
-
-			// Create the label using a span
-        		var label = document.createElement("span");
-        		label.innerHTML = '<font color="#FAFAFA"><b>For Pulse plotting;.</b></font>';
-
-        	        var inputPulseT = document.createElement("input");
-        	        inputPulseT.type = "text";
-      		        inputPulseT.placeholder = "Time " + (i + 1);
-        	        inputPulseT.id = "dNT" + (i+1);
-        	        inputPulseT.name = "dNT" + (i+1);
-			inputGroupPulseT.appendChild(label);  // Add label before input
-        	        inputGroupPulseT.appendChild(inputPulseT);
-	
-        	        containerPulseTime.appendChild(inputGroupPulseT);
-        	    }
-        	}
-
-		// Listen for changes in the number input field and generate fields accordingly
-		document.getElementById("PULSEnumtime").addEventListener("input", generatePulseTimeFields);
-
-		// Initial generation of fields when the page loads
-		generatePulseTimeFields();
-			
 
 
         	// Function to generate input fields based on the number of rows specified
